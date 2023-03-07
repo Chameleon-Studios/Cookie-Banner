@@ -7,19 +7,19 @@ You will need to grab the js and css files from this repo and copy them into you
 
 The following HTML snippet will then need to be dropped into your project template, for example at the bottom of the footer but this depends on where you intend the consent form to be displayed:
 ```
-	<!-- Cookie Banner -->
-	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/cookies/cookies.css" />
-	<script src="<?php echo get_template_directory_uri(); ?>/cookies/cookies.js"></script>
-	<script type="text/javascript">
-		var cookieBanner = new cookieBanner();
-	</script>
+<!-- Cookie Banner -->
+<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/cookies/cookies.css" />
+<script src="<?php echo get_template_directory_uri(); ?>/cookies/cookies.js"></script>
+<script type="text/javascript">
+	var cookieBanner = new cookieBanner();
+</script>
 ```
 
 The most basic way to get going is just by initialising the script in the following way, this will just use all the default settings:
 ```
-	<script type="text/javascript">
-		var cookieBanner = new cookieBanner();
-	</script>
+<script type="text/javascript">
+	var cookieBanner = new cookieBanner();
+</script>
 ```
 
 ## Options
