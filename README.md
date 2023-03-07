@@ -1,6 +1,5 @@
 # Chameleon Cookie Banner
-A cookie banner javascript plugin with no dependancies to get and maintain cookie consent on websites. 
-
+A cookie banner javascript plugin with no dependancies to get and maintain cookie consent on websites. For a working example check: https://cookies.chameleonstudios.co.uk/ ```(test / cmq(Af5%_325)```
 
 ## Usage
 You will need to grab the js and css files from this repo and copy them into your project. Depending on where you save the files you will need to update the paths in the code below.
