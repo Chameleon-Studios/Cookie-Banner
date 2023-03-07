@@ -139,6 +139,7 @@
 /* The cookie icon trigger  */
 .ccicon {
 	position: fixed;
+	z-index: 99997;
 	bottom: 0;
 	left: 0;
 	width: 75px;
@@ -166,10 +167,6 @@
 
 .ccicon svg {
 	width: 100%;
-}
-
-.ccicon svg #star {
-	fill: white;
 }
 
 .ccicon svg #triangle {
