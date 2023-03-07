@@ -10,6 +10,7 @@
 			cookieTimeout : 14, // Number of days
 			forceDecision : true, 
 			privacyPage : "cookie-policy", 
+			showCookieIcon : false, 
 			debug : false, 
 		};
 
@@ -26,7 +27,7 @@
 		// Initialise the plugin
 		init : function() {
 
-			// Check for bots and dotn show if detected
+			// Check for bots and do not show if detected
 			var bots = /bot|crawler|spider|crawling/i;
 			var isBot = bots.test( navigator.userAgent );
 			if ( isBot ) {
@@ -36,47 +37,47 @@
 			// Set the click listeners early
 			this.clickListeners();
 
-			// Update the debug
-			this.updateStatus();
-
-			// User has already consent to use cookies to tracking
+			// User has already set their consent to use cookies
 			if ( this.hasConsent('true') || this.hasConsent('false') ) {
+				this.updateStatus();
+				this.showCookieIcon();
 				return false;
 			}
+
+			// If we are not forcing a decision then assume constent and set the cookie until the user sets otherwise
+			if ( !this.settings.forceDecision && !this.hasConsent('assumed') ) {
+				this.setCookie( this.settings.cookieName, "assumed" );
+			}
+			
+			// Update the debug
+			this.updateStatus();
 
 			// Otherwise run the banner
 			this.showBanner();
 
 			// Do not show the underlay if on the cookies information page
 			var slug = location.pathname;
-			console.log("slug: " + slug);
 			if ( slug.indexOf( this.settings.privacyPage ) == -1 ) {
 				this.showUnderlay();
 			}
 		},
 
-		updateStatus: function() {
-			var _this = this;
+		// Display the preferences
+		showCookieIcon: function () {
 
-			if ( !this.settings.debug ) return;
+			if ( !this.settings.showCookieIcon ) return;
 
-			// ccdebug
-			var status = 'Not set';
-			if ( _this.hasConsent('true') ) {
-				status = 'All cookies';
-			} else if ( _this.hasConsent('false') ) {
-				status = 'Only essential';
-			}
-			status = '[Cookie status: ' + status + ']';
+			// Build the banner html
+			var html = '';
+			html += '<a href="#" class="ccprefs-trigger">';
+			html += '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72.5 72.5" enable-background="new 0 0 72.5 72.5" xml:space="preserve"><title>Cookie Control Icon</title><g id="triangle"><path d="M0,0l72.5,72.5H0V0z"></path></g><g id="star"><path d="M33.2,51.9l-3.9-2.6l1.6-4.4l-4.7,0.2L25,40.6l-3.7,2.9l-3.7-2.9l-1.2,4.5l-4.7-0.2l1.6,4.4l-3.9,2.6l3.9,2.6l-1.6,4.4l4.7-0.2l1.2,4.5l3.7-2.9l3.7,2.9l1.2-4.5l4.7,0.2l-1.6-4.4L33.2,51.9z M24.6,55.3c-0.3,0.4-0.8,0.8-1.3,1s-1.1,0.3-1.9,0.3c-0.9,0-1.7-0.1-2.3-0.4s-1.1-0.7-1.5-1.4c-0.4-0.7-0.6-1.6-0.6-2.6c0-1.4,0.4-2.5,1.1-3.3c0.8-0.8,1.8-1.1,3.2-1.1c1.1,0,1.9,0.2,2.6,0.7s1.1,1.1,1.4,2L23,50.9c-0.1-0.3-0.2-0.5-0.3-0.6c-0.1-0.2-0.3-0.4-0.5-0.5s-0.5-0.2-0.7-0.2c-0.6,0-1.1,0.2-1.4,0.7c-0.2,0.4-0.4,0.9-0.4,1.7c0,1,0.1,1.6,0.4,2c0.3,0.4,0.7,0.5,1.2,0.5c0.5,0,0.9-0.1,1.2-0.4s0.4-0.7,0.6-1.2l2.3,0.7C25.2,54.3,25,54.8,24.6,55.3z"></path></g></svg>';
+			html += '</a>';
 
-			// Output to debug element is it exists
-			var debugElement = document.getElementById("ccdebug");
-			if ( debugElement ) {
-				debugElement.innerHTML = status;
-			}
-
-			// Output to console
-			console.log(status);
+			// Output to the current location in the DOM
+			var node = document.createElement('div');
+			node.className = 'ccicon';
+			node.innerHTML = html;
+			document.body.appendChild(node);
 		}, 
 
 		// Display the preferences
@@ -169,6 +170,7 @@
 			// Output to the current location in the DOM
 			var node = document.createElement('div');
 			node.className = 'ccunderlay';
+			node.classList.add("ccunderlay--frosted");
 			document.body.appendChild(node);
 		},
 
@@ -227,13 +229,13 @@
 				};
 
 				// Preferences button
-				if( event.target.id == 'ccprefs-trigger' ) {
+				if( event.target.classList.contains('ccprefs-trigger') ) {
 					event.preventDefault();
 					_this.showPreferences();
 					_this.showUnderlay();
 				};
 
-				// Preferences button
+				// Preferences close link
 				if( event.target.id == 'ccprefs-close' ) {
 					event.preventDefault();
 					_this.removePreferences();
@@ -247,6 +249,32 @@
 			} );
 
 		},
+
+		updateStatus: function() {
+			var _this = this;
+
+			if ( !this.settings.debug ) return;
+
+			// ccdebug
+			var status = 'Not set';
+			if ( _this.hasConsent('true') ) {
+				status = 'All cookies';
+			} else if ( _this.hasConsent('false') ) {
+				status = 'Only essential';
+			} else if ( _this.hasConsent('assumed') ) {
+				status = 'Assumed';
+			}
+			status = '[Cookie status: ' + status + ']';
+
+			// Output to debug element is it exists
+			var debugElement = document.getElementById("ccdebug");
+			if ( debugElement ) {
+				debugElement.innerHTML = status;
+			}
+
+			// Output to console
+			console.log(status);
+		}, 
 
 		// Check for existing consent
 		hasConsent: function (value) {

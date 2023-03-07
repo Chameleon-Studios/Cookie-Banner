@@ -136,6 +136,47 @@
 	color: white;
 }
 
+/* The cookie icon trigger  */
+.ccicon {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 75px;
+	height: 75px;
+}
+
+.ccicon a {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.ccicon a:after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.ccicon svg {
+	width: 100%;
+}
+
+.ccicon svg #star {
+	fill: white;
+}
+
+.ccicon svg #triangle {
+	fill: black;
+}
+
+
 
 /* Cookie Banner */
 .ccbanner {
@@ -245,6 +286,11 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: white;
-	opacity: 0.75;
+	background-color: rgba(255, 255, 255, 0.75);
 }
+
+.ccunderlay--frosted {
+	backdrop-filter: blur(2px);
+}
+
+

@@ -54,9 +54,15 @@ Set whether you want to force the user to make a decision by creating an underla
 (default : "cookie-policy")
 Set the URL of the website cookie policy. This is really only needed is you set ```forceDecision : true```. As this will check for the cookie page and no show the underlay if it matches - without it is hard for users to read the cookie policy!
 
+#### ```showCookieIcon```
+(default : false)
+Choose whether to show a little cookie icon fixed to the bottom left corner of the screen. Clicking this triggers the cookie preferences modal
+
 #### ```debug```
 (default : false)
 You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
+
+
 
 ## Third party javascript
 Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to add the following data attributes so that the script can also manage the execution of these functions.
