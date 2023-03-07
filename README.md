@@ -13,11 +13,25 @@ The following HTML snippet will then need to be dropped into your project templa
 	var cookieBanner = new cookieBanner();
 </script>
 ```
-
+### Quick setup
 The most basic way to get going is just by initialising the script in the following way, this will just use all the default settings:
 ```
 <script type="text/javascript">
 	var cookieBanner = new cookieBanner();
+</script>
+```
+
+### More complete setup
+Using the options listed further down on this page you can customise the Cookie Banner in multiple ways, here is an example:
+```
+<script type="text/javascript">
+	var cookieBanner = new cookieBanner({
+		cookieName: "cookieBanner", 
+		forceDecision: true, 
+		cookieTimeout: 90, 
+		privacyPage : "privacy-policy", 
+		debug : true, 
+	});
 </script>
 ```
 
