@@ -11,6 +11,7 @@
 			forceDecision : true, 
 			privacyPage : "cookie-policy", 
 			showCookieIcon : false, 
+			frostyOverlay : true, 
 			debug : false, 
 		};
 
@@ -170,7 +171,7 @@
 			// Output to the current location in the DOM
 			var node = document.createElement('div');
 			node.className = 'ccunderlay';
-			node.classList.add("ccunderlay--frosted");
+			if ( this.settings.frostyOverlay ) node.classList.add("ccunderlay--frosted");
 			document.body.appendChild(node);
 		},
 
