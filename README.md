@@ -25,17 +25,17 @@ The most basic way to get going is just by initialising the script in the follow
 ## Options
 The plugin will run fine out of the box but can be customised with the following options: 
 
-#### ```cookieName```
-(default: 'hasConsent'). You can chooce the name of the cookie set to store the constent choice
+#### ```cookieName``` (default: 'hasConsent')
+You can choose the name of the cookie set to store the constent choice
 
-#### ```cookieTimeout```
-(default : 14). Number of days to save the cookie choice for
+#### ```cookieTimeout``` (default : 14)
+Number of days to save the cookie choice for
 
-#### ```forceDecision```
-(default : true). Set whether you want to force the user to make a decision by creating an underlay to prevent interacton with the rest of the website. 
+#### ```forceDecision``` (default : true)
+Set whether you want to force the user to make a decision by creating an underlay to prevent interacton with the rest of the website. 
 
-#### ```privacyPage``` 
-(default : "cookie-policy"). Set the URL of the website cookie policy. This is really only needed is you set ```forceDecision : true```. As this will check for the cookie page and no show the underlay if it matches - without it is hard for users to read the cookie policy!
+#### ```privacyPage```  (default : "cookie-policy")
+Set the URL of the website cookie policy. This is really only needed is you set ```forceDecision : true```. As this will check for the cookie page and no show the underlay if it matches - without it is hard for users to read the cookie policy!
 
-#### ```debug```
-(default : false). You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
+#### ```debug``` (default : false)
+You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
