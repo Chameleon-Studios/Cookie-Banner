@@ -73,11 +73,25 @@ You can optionally turn debugging on. This will output the cookie status to the 
 ## Third party javascript
 Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to add the following data attributes so that the script can also manage the execution of these functions.
 
-```TBC```
+```
+<script type="text/plain">
+	// Dont run me until you have the users consent
+	alert('BOOM');
+</script>
+```
 
 ### Google Analytics example
 GA4 is a commonly used third party that should be managed by the cookie banner, this is how to achieve this:
 
-```TBC```
+```
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=XX-XXXXXX-XX" type="text/plain"></script>
+<script type="text/plain">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'XX-XXXXXX-XX');
+</script>
+```
 
 
