@@ -13,6 +13,8 @@ The following HTML snippet will then need to be dropped into your project templa
 	var cookieBanner = new cookieBanner();
 </script>
 ```
+[To do: should we use a CDN to include these files from somewhere?]
+
 ### Quick setup
 The most basic way to get going is just by initialising the script in the following way, this will just use all the default settings:
 ```
