@@ -92,19 +92,19 @@ Modify the content of the tools with the following:
 (Default : 'Cookie Preferences')
 
 #### ```textPreferencesContent```
-(Default: '<p>We use cookies to collect and store information about how you use this website. They are used to improve how websites work, such as enabling interactive features, and to provide information to website owners about how their site is used and how well it is performing. You can change your preferences at any time.</p><p>Find out more about the cookies used on this website and select your preferences below:</p>)
+(Default: '```<p>We use cookies to collect and store information about how you use this website. They are used to improve how websites work, such as enabling interactive features, and to provide information to website owners about how their site is used and how well it is performing. You can change your preferences at any time.</p><p>Find out more about the cookies used on this website and select your preferences below:</p>```')
 
 #### ```textPreferencesEssentialTitle```
 (Default: 'Essential Cookies')
 
 #### ```textPreferencesEssentialContent```
-(Default: '<p>These cookies let you use all parts of the website and remember the choices you make to give you better functionality and personalised features. Without them, services that you’ve asked for can’t be provided.</p>')
+(Default: '```<p>These cookies let you use all parts of the website and remember the choices you make to give you better functionality and personalised features. Without them, services that you’ve asked for can’t be provided.</p>```')
 
 #### ```textPreferencesThirdpartyTitle```
 (Default: '3rd Party Cookies')
 
 #### ```textPreferencesThirdpartyContent```
-(Default: '<p>We use third-party cookies to track the actions of visitors to our site, allowing us to assess the effectiveness of our digital advertising.</p>')
+(Default: '```<p>We use third-party cookies to track the actions of visitors to our site, allowing us to assess the effectiveness of our digital advertising.</p>```')
 
 #### ```textPreferencesConfirmButton```
 (Default: 'Confirm your choices')
