@@ -180,6 +180,8 @@
 	position: fixed;
 	z-index: 99999;
 	bottom: 0;
+	left: 0;
+	right: 0;
 	background-color: white;
 	box-shadow: 0 7px 9px 7px rgb(0 0 0 / 20%);
 }

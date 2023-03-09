@@ -6,13 +6,32 @@
 	{
 		// Define the default settings
 		let defaults = {
-			cookieName : 'hasConsent', 
-			cookieTimeout : 14, // Number of days
-			forceDecision : true, 
-			privacyPage : "cookie-policy", 
-			showCookieIcon : false, 
-			frostyOverlay : true, 
-			debug : false, 
+
+			// General
+			cookieName : 'cookieConsent', // Set the name of the cookie used to store preferences 
+			cookieTimeout : 90, // Number of days before the cookie expires 
+			privacyPage : "cookie-policy", // Looking for a string match so no need for start or end slashes 
+			showCookieIcon : false, // Show the cookie icon fixed bottom left to bring back the preferences modal 
+			forceDecision : false, // Prevent users navigating the website before making a decision 
+			assumeConsent : true, // Assume consent until confirmed
+			frostyOverlay : true, // Only used when forceDecision is true. Option to show frosted underlay 
+			debug : false, // Ouput to console log 
+
+			// Cookie Banner 
+			textBannerTitle : 'Cookies',
+			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="/privacy-policy/">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
+			textBannerPreferences : 'Preferences',
+			textBannerButton : 'Accept All',
+
+			// Cookie Preferences
+			textPreferencesTitle : 'Cookie Preferences', 
+			textPreferencesContent : '<p>We use cookies to collect and store information about how you use this website. They are used to improve how websites work, such as enabling interactive features, and to provide information to website owners about how their site is used and how well it is performing. You can change your preferences at any time.</p><p>Find out more about the cookies used on this website and select your preferences below:</p>', 
+			textPreferencesEssentialTitle : 'Essential Cookies', 
+			textPreferencesEssentialContent : '<p>These cookies let you use all parts of the website and remember the choices you make to give you better functionality and personalised features. Without them, services that you’ve asked for can’t be provided.</p>', 
+			textPreferencesThirdpartyTitle : '3rd Party Cookies', 
+			textPreferencesThirdpartyContent : '<p>We use third-party cookies to track the actions of visitors to our site, allowing us to assess the effectiveness of our digital advertising.</p>', 
+			textPreferencesConfirmButton : 'Confirm your choices',
+			textPreferencesAcceptButton : 'Accept All',
 		};
 
 		// Update the settings
@@ -40,33 +59,80 @@
 
 			// User has already set their consent to use cookies
 			if ( this.hasConsent('true') || this.hasConsent('false') ) {
-				this.updateStatus();
-				this.showCookieIcon();
-				return false;
-			}
 
-			// If we are not forcing a decision then assume constent and set the cookie until the user sets otherwise
-			if ( !this.settings.forceDecision && !this.hasConsent('assumed') ) {
-				this.setCookie( this.settings.cookieName, "assumed" );
+				this.showCookieIcon();
+
+			} else {
+
+				// If we are not forcing a decision then assume constent and set the cookie until the user sets otherwise
+				if ( !this.settings.forceDecision && this.settings.assumeConsent ) {
+					this.setCookie( this.settings.cookieName, "assumed" );
+				}
+
+				// Otherwise run the banner
+				this.showBanner();
+
+				// Do not show the underlay if on the cookies information page
+				var slug = location.pathname;
+				if ( slug.indexOf( this.settings.privacyPage ) == -1 ) {
+					this.showUnderlay();
+				}
 			}
 			
-			// Update the debug
 			this.updateStatus();
-
-			// Otherwise run the banner
-			this.showBanner();
-
-			// Do not show the underlay if on the cookies information page
-			var slug = location.pathname;
-			if ( slug.indexOf( this.settings.privacyPage ) == -1 ) {
-				this.showUnderlay();
-			}
+			this.runBlockedJavascript();
 		},
+
+		runBlockedJavascript: function() {
+
+			// If no consent given always fail at this point
+			if ( this.hasConsent('true') || this.hasConsent('assumed') ) {
+
+				// Debug
+				if ( this.settings.debug ) console.log('[Cookie banner: Run blocked Javascript]');
+
+				// Get all script tags with type="text/plain"
+				var scripts = document.getElementsByTagName("script");
+
+				// Loop through setting to type="text/javascript"
+				for (var i = 0; i < scripts.length; i++) {
+
+					if ( scripts[i].getAttribute("type") == "text/plain" ) {
+
+						// Run the scripts
+						if ( scripts[i].getAttribute("src") ) {
+
+							// add it afresh
+							var js_script = document.createElement('script');
+							js_script.type = "text/javascript";
+							js_script.src = scripts[i].getAttribute("src");
+							js_script.async = true;
+							scripts[i].parentNode.insertBefore(js_script, scripts[i].nextSibling);
+
+							// remove old script
+							scripts[i].parentNode.removeChild( scripts[i] );
+
+						} else {
+
+							// Script inline
+							scripts[i].setAttribute("type", "text/javascript");
+							var scriptText = scripts[i].innerHTML;
+							eval(scriptText);
+
+						}
+					}
+				}
+			}
+		}, 
 
 		// Display the preferences
 		showCookieIcon: function () {
 
+			// check to show or not
 			if ( !this.settings.showCookieIcon ) return;
+
+			// check if it already exists
+			if ( document.getElementsByClassName('ccicon').length ) return;
 
 			// Build the banner html
 			var html = '';
@@ -88,29 +154,28 @@
 			var html = '';
 			html += '<div class="ccprefs-wrapper">';
 			html += '<div class="ccprefs-content">';
-			html += '<p class="ccprefs-title">Cookie preferences</p>';
-			html += '<p class="ccprefs-message">We use cookies to collect and store information about how you use this website. They are used to improve how websites work, such as enabling interactive features, and to provide information to website owners about how their site is used and how well it is performing. You can change your preferences at any time.</p>';
-			html += '<p class="ccprefs-message">Find out more about the cookies used on this website and select your preferences below:</p>';
+			html += '<p class="ccprefs-title">' + this.settings.textPreferencesTitle + '</p>';
+			html += this.settings.textPreferencesContent;
 			html += '<a href="#" class="ccprefs-close" id="ccprefs-close">Close</a>';
 			html += '</div>';
 			html += '<div class="ccprefs-option">';
 			html += '<div class="ccprefs-select"><input type="checkbox" name="" checked="checked" disabled></div>';
 			html += '<div class="ccprefs-definition">';
-			html += '<p class="ccprefs-subtitle">Essential Cookies</p>';
-			html += '<p>These cookies let you use all parts of the website and remember the choices you make to give you better functionality and personalised features. Without them, services that you’ve asked for can’t be provided.</p>';
+			html += '<p class="ccprefs-subtitle">' + this.settings.textPreferencesEssentialTitle + '</p>';
+			html += this.settings.textPreferencesEssentialContent;
 			html += '</div>';
 			html += '</div>';
 			html += '<div class="ccprefs-option">';
 			html += '<div class="ccprefs-select"><input type="checkbox" name="" id="ccprefs-thirdparty"></div>';
 			html += '<div class="ccprefs-definition">';
-			html += '<label for="ccprefs-thirdparty"><p class="ccprefs-subtitle">3rd Party Cookies</p>';
-			html += '<p>We use third-party cookies to track the actions of visitors to our site, allowing us to assess the effectiveness of our digital advertising.</p></label>';
+			html += '<label for="ccprefs-thirdparty"><p class="ccprefs-subtitle">' + this.settings.textPreferencesThirdpartyTitle + '</p>';
+			html += this.settings.textPreferencesThirdpartyContent + '</label>';
 			html += '</div>';
 			html += '</div>';
 			html += '<div class="ccprefs-actions">';
 			html += '<ul>';';';
-			html += '<li class="ccprefs-button ccprefs-button--confirm"><a href="#" id="ccprefs-button--confirm">Confirm your choices</a></li>';
-			html += '<li class="ccprefs-button ccprefs-button--accept"><a href="#" id="ccprefs-button--accept">Accept All</a></li>';
+			html += '<li class="ccprefs-button ccprefs-button--confirm"><a href="#" id="ccprefs-button--confirm">' + this.settings.textPreferencesConfirmButton + '</a></li>';
+			html += '<li class="ccprefs-button ccprefs-button--accept"><a href="#" id="ccprefs-button--accept">' + this.settings.textPreferencesAcceptButton + '</a></li>';
 			html += '</ul>';
 			html += '</div>';
 			html += '</div>';
@@ -141,13 +206,13 @@
 			var html = '';
 			html += '<div class="ccbanner-wrapper">';
 			html += '<div class="ccbanner-content">';
-			html += '<p class="ccbanner-title">Cookies</p>';
-			html += '<p class="ccbanner-message">We use cookies to give you the best online experience, visit our <a href="/privacy-policy/">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.</p>';
+			if ( this.settings.textBannerTitle ) html += '<p class="ccbanner-title">' + this.settings.textBannerTitle + '</p>';
+			html += '<p class="ccbanner-message">' + this.settings.textBannerContent + '</p>';
 			html += '</div>';
 			html += '<div class="ccbanner-actions">';
 			html += '<ul>';
-			html += '<li class="ccbanner-button ccbanner-button--preferences"><a href="#" id="ccbanner-button--preferences">Preferences</a></li>';
-			html += '<li class="ccbanner-button ccbanner-button--accept"><a href="#" id="ccbanner-button--accept">Accept All</a></li>';
+			html += '<li class="ccbanner-button ccbanner-button--preferences"><a href="#" id="ccbanner-button--preferences">' + this.settings.textBannerPreferences + '</a></li>';
+			html += '<li class="ccbanner-button ccbanner-button--accept"><a href="#" id="ccbanner-button--accept">' + this.settings.textBannerButton + '</a></li>';
 			html += '</ul>';
 			html += '</div>';
 			html += '</div>';
@@ -190,44 +255,50 @@
 
 			document.body.addEventListener( 'click', function ( event ) {
 
-				// Accept all button
+				// Banner: Accept all button
 				if( event.target.id == 'ccbanner-button--accept' ) {
 					event.preventDefault();
 					_this.setCookie( _this.settings.cookieName, "true" );
 					_this.removeBanner();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.runBlockedJavascript();
+					_this.showCookieIcon();
 				};
 
-				// Preferences button
+				// Banner: Preferences button
 				if( event.target.id == 'ccbanner-button--preferences' ) {
 					event.preventDefault();
 					_this.showPreferences();
 					_this.removeBanner();
 				};
 
-				// Accept all button
+				// Preferences: Accept all button
 				if( event.target.id == 'ccprefs-button--accept' ) {
 					event.preventDefault();
 					_this.setCookie( _this.settings.cookieName, "true" );
 					_this.removePreferences();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.runBlockedJavascript();
+					_this.showCookieIcon();
 				};
 
-				// Accept all button
+				// Preferences: Confirm choices all button
 				if( event.target.id == 'ccprefs-button--confirm' ) {
 					event.preventDefault();
 
 					// Check for Third Party input checkbox is checked or not
 					if ( document.getElementById("ccprefs-thirdparty").checked ) {
 						_this.setCookie( _this.settings.cookieName, "true" );
+						_this.runBlockedJavascript();
 					} else {
 						_this.setCookie( _this.settings.cookieName, "false" );
 					}
 					_this.removePreferences();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.showCookieIcon();
 				};
 
 				// Preferences button
