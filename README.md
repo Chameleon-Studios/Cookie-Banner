@@ -71,7 +71,7 @@ You can optionally turn debugging on. This will output the cookie status to the 
 
 
 ## Third party javascript
-Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to add the following data attributes so that the script can also manage the execution of these functions.
+Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to either add or replace the existing <script> tag's 'type' attribute with ```type="text/plain"```. See the simple example below for some inline code:
 
 ```
 <script type="text/plain">
@@ -80,6 +80,12 @@ Now that the cookie banner is managing the user consent we can tag any third par
 </script>
 ```
 
+And for an external script:
+	
+```
+<script async src="https://www.website.com/this-is-a-javascript-file.js" type="text/plain"></script>
+```
+	
 ### Google Analytics example
 GA4 is a commonly used third party that should be managed by the cookie banner, this is how to achieve this:
 
