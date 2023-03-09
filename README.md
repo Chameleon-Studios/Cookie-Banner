@@ -37,7 +37,7 @@ Using the options listed further down on this page you can customise the Cookie 
 </script>
 ```
 
-## Function Options
+## Functional Options
 The plugin will run fine out of the box but can be customised with the following options: 
 
 #### ```cookieName```
