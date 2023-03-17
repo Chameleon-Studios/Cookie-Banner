@@ -39,12 +39,13 @@ Using the options listed further down on this page you can customise the Cookie 
 
 ### WordPress Example
 If used on a WordPress website you can the the privacy page URL with a WP function so that if the page slug changes a 404 is not created:
+```
 <script type="text/javascript">
 	var cookieBanner = new cookieBanner({
 		privacyPage : "<?php echo get_the_permalink(3); ?>", 
 	});
 </script>
-
+```
 
 ## Functional Options
 The plugin will run fine out of the box but can be customised with the following options: 
