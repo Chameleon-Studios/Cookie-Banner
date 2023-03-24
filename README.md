@@ -8,8 +8,10 @@ You will need to grab the js and css files from this repo and include them in yo
 
 2. Include the js and css from a CDN. The two files you will need are as follows:
 
-```https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.js
-https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.css```
+```
+https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.js
+https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.css
+```
 
 Once the files are included in your project you can initialise the plugin:
 
