@@ -2,18 +2,15 @@
 A cookie banner javascript plugin with no dependancies to get and maintain cookie consent on websites. For a working example check: https://cookies.chameleonstudios.co.uk/ ```(test / cmq(Af5%_325)```
 
 ## Usage
-You will need to grab the js and css files from this repo and copy them into your project. Depending on where you save the files you will need to update the paths in the code below.
+You will need to grab the js and css files from this repo and include them in your project. You can do this in a couple of ways:
 
-The following HTML snippet will then need to be dropped into your project template, for example at the bottom of the footer but this depends on where you intend the consent form to be displayed:
-```
-<!-- Cookie Banner -->
-<link rel="stylesheet" type="text/css" href="cookies.css" />
-<script src="cookies.js"></script>
-<script type="text/javascript">
-	var cookieBanner = new cookieBanner();
-</script>
-```
-[To do: should we use a CDN to include these files from somewhere?]
+1. Copy this js and css files from this repo and paste them into your project. They can then get minified and combined in your usual build process.
+
+2. Include the js and css from a CDN. The two files you will need are: 
+https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.js
+https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.css
+
+Once the files are included in your project you can initialise the plugin:
 
 ### Quick setup
 The most basic way to get going is just by initialising the script in the following way, this will just use all the default settings:
