@@ -6,9 +6,10 @@ You will need to grab the js and css files from this repo and include them in yo
 
 1. Copy this js and css files from this repo and paste them into your project. They can then get minified and combined in your usual build process.
 
-2. Include the js and css from a CDN. The two files you will need are: 
-https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.js
-https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.css
+2. Include the js and css from a CDN. The two files you will need are as follows:
+
+```https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.js
+https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.0/cookies.min.css```
 
 Once the files are included in your project you can initialise the plugin:
 
