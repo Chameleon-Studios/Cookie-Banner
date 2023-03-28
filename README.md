@@ -47,6 +47,20 @@ If used on a WordPress website you can the the privacy page URL with a WP functi
 </script>
 ```
 
+### CDN Example
+```
+<script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.css" rel="stylesheet">
+<script type="text/javascript">
+	var cookieBanner = new cookieBanner({
+		forceDecision: true, 
+		cookieTimeout: 90, 
+		privacyPage : "privacy-policy", 
+	});
+</script>
+```
+
+
 ## Functional Options
 The plugin will run fine out of the box but can be customised with the following options: 
 
