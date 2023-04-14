@@ -13,12 +13,12 @@ Copy this js and css files from this repo and paste them into your project. They
 
 Include the JS and CSS from a CDN. The two files you will need are as follows:
 
-** Javascript: **
+**Javascript:**
 ```
 <script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.js"></script>
 ```
 
-** CSS: **
+**CSS:**
 ```
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.css" />
 ```
