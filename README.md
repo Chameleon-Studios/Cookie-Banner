@@ -15,7 +15,7 @@ Include the JS and CSS from a CDN. The two files you will need are as follows:
 
 **Javascript:**
 ```
-<script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@latest/cookies.min.js"></script>
 ```
 
 **CSS:**
@@ -59,7 +59,7 @@ If used on a WordPress website you can the the privacy page URL with a WP functi
 
 ### CDN Example
 ```
-<script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@latest/cookies.min.js" type="text/javascript"></script>
 <link href="https://cdn.jsdelivr.net/gh/Chameleon-Studios/Cookie-Banner@v1.1/cookies.min.css" rel="stylesheet">
 <script type="text/javascript">
 	var cookieBanner = new cookieBanner({
