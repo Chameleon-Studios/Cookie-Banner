@@ -37,6 +37,7 @@
 	top: 30px;
 	right: 30px;
 	border-bottom: solid 1px black;
+	text-decoration: none;
 }
 
 .ccprefs-close:hover {
@@ -116,6 +117,7 @@
 	border: solid 1px #000;
 	color: white;
 	padding: 10px 15px;
+	text-decoration: none;
 }
 
 .ccprefs-button--accept a:hover {
@@ -129,6 +131,7 @@
 	color: black;
 	border: solid 1px black;
 	padding: 10px 15px;
+	text-decoration: none;
 }
 
 .ccprefs-button--confirm a:hover {
@@ -225,6 +228,7 @@
 
 .ccbanner-content p a {
 	border-bottom: solid 1px black;
+	text-decoration: none;
 }
 
 .ccbanner-content p a:hover {
@@ -259,6 +263,7 @@
 }
 
 .ccbanner-button--accept a {
+	text-decoration: none;
 	background-color: #000; 
 	color: white;
 	padding: 10px 15px;
@@ -270,6 +275,7 @@
 
 .ccbanner-button--preferences a {
 	border-bottom: solid 1px black;
+	text-decoration: none;
 }
 
 .ccbanner-button--preferences a:hover {
