@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.1
+Version: 1.4
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -33,7 +33,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 
 			// Cookie Banner 
 			textBannerTitle : 'Cookies',
-			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="'+privacyPage+'">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
+			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="[privacyPage]">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
 			textBannerPreferences : 'Preferences',
 			textBannerButton : 'Accept All',
 
@@ -50,7 +50,10 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 
 		// Update the settings
 		this.settings = (arguments[0] && typeof arguments[0] === 'object') ? extendDefaults(defaults, arguments[0]) : defaults;
-		
+
+		// Update the placeholder privacy page URL with the correct value
+		this.settings.textBannerContent = this.settings.textBannerContent.replace("[privacyPage]", this.settings.privacyPage);
+
 		// Start the plugin
 		this.init();
 	}
