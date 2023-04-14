@@ -24,7 +24,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			// General
 			cookieName : 'cookieConsent', // Set the name of the cookie used to store preferences 
 			cookieTimeout : 90, // Number of days before the cookie expires 
-			privacyPage : "cookie-policy", // Looking for a string match so no need for start or end slashes 
+			privacyPage : "/privacy-policy/", // Looking for a string match so no need for start or end slashes 
 			showCookieIcon : false, // Show the cookie icon fixed bottom left to bring back the preferences modal 
 			forceDecision : false, // Prevent users navigating the website before making a decision 
 			assumeConsent : true, // Assume consent until confirmed
@@ -33,7 +33,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 
 			// Cookie Banner 
 			textBannerTitle : 'Cookies',
-			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="/privacy-policy/">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
+			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="'+privacyPage+'">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
 			textBannerPreferences : 'Preferences',
 			textBannerButton : 'Accept All',
 
