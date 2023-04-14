@@ -41,7 +41,7 @@ Using the options listed further down on this page you can customise the Cookie 
 		cookieName: "cookieBanner", 
 		forceDecision: true, 
 		cookieTimeout: 90, 
-		privacyPage : "privacy-policy", 
+		privacyPage : "/privacy-policy/", 
 		debug : true, 
 	});
 </script>
@@ -65,7 +65,7 @@ If used on a WordPress website you can the the privacy page URL with a WP functi
 	var cookieBanner = new cookieBanner({
 		forceDecision: true, 
 		cookieTimeout: 90, 
-		privacyPage : "privacy-policy", 
+		privacyPage : "/privacy-policy/", 
 	});
 </script>
 ```
@@ -83,8 +83,8 @@ Set the name of the cookie used to store preferences
 Number of days before the cookie expires 
 
 #### ```privacyPage``` 
-(default : "cookie-policy")
-Set the URL of the website cookie policy. This is really only needed is you set ```forceDecision : true```. As this will check for the cookie page and no show the underlay if it matches - without it is hard for users to read the cookie policy! Looking for a string match so no need for start or end slashes
+(default : "/privacy-policy/")
+Set the URL of the website cookie policy. This is really only needed is you set ```forceDecision : true```. As this will check for the cookie page and no show the underlay if it matches - without it is hard for users to read the cookie policy!
 
 #### ```showCookieIcon```
 (default : false)
