@@ -113,7 +113,7 @@ Modify the content of the tools with the following:
 (default : '```Cookies```')
 
 #### ```textBannerContent```
-(Default : '```We use cookies to give you the best online experience, visit our <a href="/privacy-policy/">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.```',
+(Default : '```We use cookies to give you the best online experience, visit our <a href="[privacyPage]">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.```',
 
 #### ```textBannerPreferences```
 (Default : '```Preferences```')
