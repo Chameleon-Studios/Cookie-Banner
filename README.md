@@ -176,4 +176,12 @@ GA4 is a commonly used third party that should be managed by the cookie banner, 
 </script>
 ```
 
+## Adding a Cookie Preferences Link
+With the cookie banner installed and working it is good practice to have a way to bring back the options so that users can change or verify their preferences. You have two ways of doing this:
+
+First, you can add the option in the JavaScript initialisation script. This will enable a small icon fixed to the bottom left corner of the browser that returns the cookie banner.
+```showCookieIcon : true```
+
+Alternatively, you can add your own link or icon to the interface. By just including the following CSS class to the element it will add a click listener to return the cookie banner.
+```.ccprefs-trigger```
 
