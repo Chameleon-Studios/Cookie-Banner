@@ -102,6 +102,10 @@ To make the website harder to browser without making a decision we can apply a f
 (default : true)
 Only works if ```forceDecision : false```. It means the website will assume consent and run blocked javascript until the user chooses otherwise.
 
+#### ```rejectButton```
+(default : false)
+Set whether to show a reject third party cookies button. Best to also set assumeConsent to false so that cookies are not triggered first.
+
 #### ```debug```
 (default : false)
 You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
@@ -120,6 +124,9 @@ Modify the content of the tools with the following:
 
 #### ```textBannerButton```
 (Default : '```Accept All```')
+
+#### ```textBannerRejectButton```
+(Default : '```Reject```')
 
 
 #### ```textPreferencesTitle```
