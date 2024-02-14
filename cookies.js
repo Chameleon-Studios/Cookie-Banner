@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.6
+Version: 1.7
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
