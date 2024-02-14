@@ -277,7 +277,8 @@
 	padding: 10px 15px;
 }
 
-.ccbanner-button--accept a:hover {
+.ccbanner-button--accept a:hover,
+.ccbanner-button--reject a:hover {
 	background-color: #333; 
 }
 
