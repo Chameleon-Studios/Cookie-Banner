@@ -239,7 +239,7 @@
 }
 
 .ccbanner-actions {
-	flex: 0 0 300px;
+	flex: 0 0 350px;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -261,11 +261,16 @@
 	margin: 0 10px;
 }
 
+.ccbanner-actions ul li:first-child {
+	margin-left: 0;
+}
+
 .ccbanner-actions ul li:last-child {
 	margin-right: 0;
 }
 
-.ccbanner-button--accept a {
+.ccbanner-button--accept a,
+.ccbanner-button--reject a {
 	text-decoration: none;
 	background-color: #000; 
 	color: white;

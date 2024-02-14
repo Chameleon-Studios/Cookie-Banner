@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.4
+Version: 1.6
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -28,6 +28,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			showCookieIcon : false, // Show the cookie icon fixed bottom left to bring back the preferences modal 
 			forceDecision : false, // Prevent users navigating the website before making a decision 
 			assumeConsent : true, // Assume consent until confirmed
+			rejectButton : false, // Show a reject 3rd party cookies button
 			frostyOverlay : true, // Only used when forceDecision is true. Option to show frosted underlay 
 			debug : false, // Ouput to console log 
 
@@ -36,6 +37,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			textBannerContent : 'We use cookies to give you the best online experience, visit our <a href="[privacyPage]">cookie policy</a> to learn more. Choose ‘Accept all’ to agree or for more options choose ‘Preferences’.',
 			textBannerPreferences : 'Preferences',
 			textBannerButton : 'Accept All',
+			textBannerRejectButton : 'Reject',
 
 			// Cookie Preferences
 			textPreferencesTitle : 'Cookie Preferences', 
@@ -229,6 +231,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			html += '<div class="ccbanner-actions">';
 			html += '<ul>';
 			html += '<li class="ccbanner-button ccbanner-button--preferences"><a href="#" id="ccbanner-button--preferences">' + this.settings.textBannerPreferences + '</a></li>';
+			if ( this.settings.rejectButton ) html += '<li class="ccbanner-button ccbanner-button--reject"><a href="#" id="ccbanner-button--reject">' + this.settings.textBannerRejectButton + '</a></li>';
 			html += '<li class="ccbanner-button ccbanner-button--accept"><a href="#" id="ccbanner-button--accept">' + this.settings.textBannerButton + '</a></li>';
 			html += '</ul>';
 			html += '</div>';
@@ -280,6 +283,16 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 					_this.removeUnderlay();
 					_this.updateStatus();
 					_this.runBlockedJavascript();
+					_this.showCookieIcon();
+				};
+
+				// Banner: reject 3rd party button
+				if( event.target.id == 'ccbanner-button--reject' ) {
+					event.preventDefault();
+					_this.setCookie( _this.settings.cookieName, "false" );
+					_this.removeBanner();
+					_this.removeUnderlay();
+					_this.updateStatus();
 					_this.showCookieIcon();
 				};
 
