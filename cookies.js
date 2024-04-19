@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.7
+Version: 1.8
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -48,6 +48,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			textPreferencesThirdpartyContent : '<p>We use third-party cookies to track the actions of visitors to our site, allowing us to assess the effectiveness of our digital advertising.</p>', 
 			textPreferencesConfirmButton : 'Confirm your choices',
 			textPreferencesAcceptButton : 'Accept All',
+			textPreferencesClose : 'Close',
 		};
 
 		// Update the settings
@@ -175,7 +176,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			html += '<div class="ccprefs-content">';
 			html += '<p class="ccprefs-title">' + this.settings.textPreferencesTitle + '</p>';
 			html += this.settings.textPreferencesContent;
-			html += '<a href="#" class="ccprefs-close" id="ccprefs-close">Close</a>';
+			html += '<a href="#" class="ccprefs-close" id="ccprefs-close">' + this.settings.textPreferencesClose + '</a>';
 			html += '</div>';
 			html += '<div class="ccprefs-option">';
 			html += '<div class="ccprefs-select"><input type="checkbox" name="" checked="checked" disabled></div>';

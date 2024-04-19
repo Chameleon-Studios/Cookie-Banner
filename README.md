@@ -153,6 +153,9 @@ Modify the content of the tools with the following:
 #### ```textPreferencesAcceptButton```
 (Default: '```Accept All```')
 
+#### ```textPreferencesClose```
+(Default: '```Close```')
+
 ## Third party javascript
 Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to either add or replace the existing <script> tag's 'type' attribute with ```type="text/plain"```. See the simple example below for some inline code:
 
