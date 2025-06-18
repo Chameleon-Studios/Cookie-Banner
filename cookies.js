@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.8
+Version: 1.9
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -241,6 +241,8 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			// Output to the current location in the DOM
 			var node = document.createElement('div');
 			node.className = 'ccbanner';
+			node.setAttribute('role', 'region'); // Add ARIA role
+			node.setAttribute('aria-label', 'Cookie consent banner'); // Add ARIA label for accessibility
 			node.innerHTML = html;
 			document.body.appendChild(node);
 		},
