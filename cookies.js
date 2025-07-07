@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.9
+Version: 1.10
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -31,6 +31,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			rejectButton : false, // Show a reject 3rd party cookies button
 			frostyOverlay : true, // Only used when forceDecision is true. Option to show frosted underlay 
 			debug : false, // Ouput to console log 
+			googleConsentMode : false, // apply google consent mode 
 
 			// Cookie Banner 
 			textBannerTitle : 'Cookies',
@@ -100,7 +101,56 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 			}
 			
 			this.updateStatus();
+			this.addGoogleConsent();
 			this.runBlockedJavascript();
+		},
+
+		updateGoogleConsent: function( consent ) {
+
+			// only run if turned on in settings
+			if ( this.settings.googleConsentMode ) {
+				if ( consent ) {
+					gtag('consent', 'update', {
+						'ad_storage': 'granted',
+						'ad_user_data': 'granted',
+						'ad_personalization': 'granted',
+						'analytics_storage': 'granted'
+					});
+				} else {
+					gtag('consent', 'update', {
+						'ad_storage': 'denied',
+						'ad_user_data': 'denied',
+						'ad_personalization': 'denied',
+						'analytics_storage': 'denied'
+					});
+				}
+
+				// Debug
+				if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode updated]');
+			}
+		},
+
+		addGoogleConsent: function() {
+
+			if ( this.settings.googleConsentMode ) {
+
+				var script = document.createElement('script');
+				script.text = `
+					window.dataLayer = window.dataLayer || [];
+					function gtag() { dataLayer.push(arguments); }
+
+					gtag('consent', 'default', {
+					'ad_storage': 'denied',
+					'ad_user_data': 'denied',
+					'ad_personalization': 'denied',
+					'analytics_storage': 'denied'
+					});
+				`;
+				document.head.appendChild(script);
+
+				// Debug
+				if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode initialised]');
+			}
 		},
 
 		runBlockedJavascript: function() {
@@ -285,6 +335,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 					_this.removeBanner();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.updateGoogleConsent(true);
 					_this.runBlockedJavascript();
 					_this.showCookieIcon();
 				};
@@ -296,6 +347,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 					_this.removeBanner();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.updateGoogleConsent(false);
 					_this.showCookieIcon();
 				};
 
@@ -313,6 +365,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 					_this.removePreferences();
 					_this.removeUnderlay();
 					_this.updateStatus();
+					_this.updateGoogleConsent(true);
 					_this.runBlockedJavascript();
 					_this.showCookieIcon();
 				};
@@ -324,9 +377,11 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 					// Check for Third Party input checkbox is checked or not
 					if ( document.getElementById("ccprefs-thirdparty").checked ) {
 						_this.setCookie( _this.settings.cookieName, "true" );
+						_this.updateGoogleConsent(true);
 						_this.runBlockedJavascript();
 					} else {
 						_this.setCookie( _this.settings.cookieName, "false" );
+						_this.updateGoogleConsent(false);
 					}
 					_this.removePreferences();
 					_this.removeUnderlay();
