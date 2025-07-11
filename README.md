@@ -110,6 +110,10 @@ Set whether to show a reject third party cookies button. Best to also set assume
 (default : false)
 You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
 
+#### ```googleConsentMode```
+(default : false)
+You can enable Google Consent Mode (v2) with this toggle. It essentially fires a gtag() function with permissions granted or denied based on the user cookie preference (or assumed consent). Turned off by defaut.
+
 ## Content Options
 Modify the content of the tools with the following:
 
@@ -155,9 +159,6 @@ Modify the content of the tools with the following:
 
 #### ```textPreferencesClose```
 (Default: '```Close```')
-
-#### ```googleConsentMode```
-(Default: '```false```')
 
 ## Third party javascript
 Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to either add or replace the existing <script> tag's 'type' attribute with ```type="text/plain"```. See the simple example below for some inline code:
