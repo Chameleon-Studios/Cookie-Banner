@@ -110,6 +110,10 @@ Set whether to show a reject third party cookies button. Best to also set assume
 (default : false)
 You can optionally turn debugging on. This will output the cookie status to the browser console and it will look for an element on the page with an ID of ```ccdebug```. If it finds it the status will be output here too.
 
+#### ```googleConsentMode```
+(default : false)
+You can enable Google Consent Mode (v2) with this toggle. It essentially fires a gtag() function with permissions granted or denied based on the user cookie preference (or assumed consent). Turned off by defaut.
+
 ## Content Options
 Modify the content of the tools with the following:
 
@@ -192,6 +196,6 @@ With the cookie banner installed and working it is good practice to have a way t
 First, you can add the option in the JavaScript initialisation script. This will enable a small icon fixed to the bottom left corner of the browser that returns the cookie banner.
 ```showCookieIcon : true```
 
-Alternatively, you can add your own link or icon to the interface. By just including the following CSS class to the element it will add a click listener to return the cookie banner.
+Alternatively, you can add your own link or icon to the interface. By just including the following CSS class to the element it will add a click listener to return the cookie banner. You can also add this link in via a WordPress menu and then add the following class to the <li> element (in WP there is no way to add the class to the <a> in a menu.
 ```.ccprefs-trigger```
 
