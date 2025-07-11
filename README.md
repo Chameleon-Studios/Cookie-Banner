@@ -156,6 +156,9 @@ Modify the content of the tools with the following:
 #### ```textPreferencesClose```
 (Default: '```Close```')
 
+#### ```googleConsentMode```
+(Default: '```false```')
+
 ## Third party javascript
 Now that the cookie banner is managing the user consent we can tag any third party javascript code that should be conditionally used. To do so we need to either add or replace the existing <script> tag's 'type' attribute with ```type="text/plain"```. See the simple example below for some inline code:
 
