@@ -116,6 +116,10 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 						'ad_personalization': 'granted',
 						'analytics_storage': 'granted'
 					});
+
+					// Debug
+					if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode updated + granted]');
+
 				} else {
 					gtag('consent', 'update', {
 						'ad_storage': 'denied',
@@ -123,10 +127,10 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 						'ad_personalization': 'denied',
 						'analytics_storage': 'denied'
 					});
-				}
 
-				// Debug
-				if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode updated]');
+					// Debug
+					if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode updated + denied]'); 
+				}
 			}
 		},
 
@@ -134,22 +138,44 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 
 			if ( this.settings.googleConsentMode ) {
 
-				var script = document.createElement('script');
-				script.text = `
-					window.dataLayer = window.dataLayer || [];
-					function gtag() { dataLayer.push(arguments); }
+				if ( this.hasConsent('true') || this.hasConsent('assumed') ) {
 
-					gtag('consent', 'default', {
-					'ad_storage': 'denied',
-					'ad_user_data': 'denied',
-					'ad_personalization': 'denied',
-					'analytics_storage': 'denied'
-					});
-				`;
-				document.head.appendChild(script);
+					var script = document.createElement('script');
+					script.text = `
+						window.dataLayer = window.dataLayer || [];
+						function gtag() { dataLayer.push(arguments); }
 
-				// Debug
-				if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode initialised]');
+						gtag('consent', 'default', {
+						'ad_storage': 'granted',
+						'ad_user_data': 'granted',
+						'ad_personalization': 'granted',
+						'analytics_storage': 'granted'
+						});
+					`;
+					document.head.appendChild(script);
+
+					// Debug
+					if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode initialised + granted]');
+
+				} else {
+
+					var script = document.createElement('script');
+					script.text = `
+						window.dataLayer = window.dataLayer || [];
+						function gtag() { dataLayer.push(arguments); }
+
+						gtag('consent', 'default', {
+						'ad_storage': 'denied',
+						'ad_user_data': 'denied',
+						'ad_personalization': 'denied',
+						'analytics_storage': 'denied'
+						});
+					`;
+					document.head.appendChild(script);
+					
+					// Debug
+					if ( this.settings.debug ) console.log('[Cookie banner: Google consent mode initialised + denied]');
+				}
 			}
 		},
 
@@ -390,7 +416,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 				};
 
 				// Preferences button
-				if( event.target.classList.contains('ccprefs-trigger') ) {
+				if( event.target.closest('.ccprefs-trigger') ) {
 					event.preventDefault();
 					_this.showPreferences();
 					_this.showUnderlay();
