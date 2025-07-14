@@ -196,6 +196,6 @@ With the cookie banner installed and working it is good practice to have a way t
 First, you can add the option in the JavaScript initialisation script. This will enable a small icon fixed to the bottom left corner of the browser that returns the cookie banner.
 ```showCookieIcon : true```
 
-Alternatively, you can add your own link or icon to the interface. By just including the following CSS class to the element it will add a click listener to return the cookie banner. You can also add this link in via a WordPress menu and then add the following class to the <li> element (in WP there is no way to add the class to the <a> in a menu.
+Alternatively, you can add your own link or icon to the interface. By just including the following CSS class to the element it will add a click listener to return the cookie banner. You can also add this link in via a WordPress menu and then add the following class to the ```<li>``` element (in WP there is no way to add the class to the <a> in a menu.
 ```.ccprefs-trigger```
 
