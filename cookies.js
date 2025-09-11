@@ -473,7 +473,7 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 		setCookie: function (name, value) {
 			var date = new Date();
 			date.setTime(date.getTime() + (this.settings.cookieTimeout * 24 * 60 * 60 * 1000));
-			document.cookie = name + '=' + value + ';expires=' + date.toGMTString() + ';path=/' + ';';
+			document.cookie = name + '=' + value + ';expires=' + date.toGMTString() + ';path=/' + ';secure';
 		},
 
 		// Delete cookie by changing expire to something in the past
