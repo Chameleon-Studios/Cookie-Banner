@@ -6,7 +6,7 @@ _________                __   .__         __________
  \______  /\____/ \____/|__|_ \__|\___  >  |______  /(____  /___|  /___|  /\___  >__|   
         \/                   \/       \/          \/      \/     \/     \/     \/ 
 
-Version: 1.11
+Version: 1.12
 Author: Chameleon Studios
 Website: http://www.chameleonstudios.co.uk
 Repo: https://github.com/Chameleon-Studios/Cookie-Banner
@@ -210,10 +210,14 @@ Repo: https://github.com/Chameleon-Studios/Cookie-Banner
 
 						} else {
 
-							// Script inline
-							scripts[i].setAttribute("type", "text/javascript");
-							var scriptText = scripts[i].innerHTML;
-							eval(scriptText);
+							// Inline script
+							var js_script = document.createElement('script');
+							js_script.type = 'text/javascript';
+							js_script.text = scripts[i].textContent;
+							scripts[i].parentNode.insertBefore(js_script, scripts[i].nextSibling);
+
+							// remove old script
+							scripts[i].parentNode.removeChild(scripts[i]);
 
 						}
 					}
